@@ -1,153 +1,60 @@
-/*
- TIPOS DE DATOS
- 
- PRIMITIVOS
-    String : "" ó ''
-    Number : 1 6,5 -9
-    Boolean : true ó false
-    undefined : variable sin valor
-    null
+ let btn = document.querySelector("button")
 
-OBJETOS
-    Object : {}
-    Array : []
-    Function
+//Evento : la ejecucion de una funcion (callback) como respuesta a una accion
+//Nodo.addEventListener(evento,callback)
 
-VARIABLES : var (es viejo) - let - const
-los nombres de una variable pueden arrancar con _ $
-ó cualquier letra
- */
+//ESTO SE LEE : "A la etiqueta que acabo de seleccionar en la variable btn quiero
+//registrarle un callback que esta en la variable hacerClick el cual se va ejecutar
+//cada vez que el evento "click" "
+btn.addEventListener("click",hacerClick)
 
-let nombre = "Jessica"
-let apellido = "Gherscovic"
-let nombre_completo = nombre + " " + apellido
+//window.hacerClick = function(){}
+//var hacerClick = function(){}
 
-let numeros = [10,7,5,2,0,"Jessica", true]
-numeros.push("hola")
-numeros.push(45)
+let contador = 1
+function hacerClick(){
+   let nuevo = document.createElement("button")
+   nuevo.innerText = "Boton " + contador
 
+   nuevo.addEventListener("click", unaMismaFuncionParaTodosLosBotones)
 
-//console.log(numeros)
+   let body = document.querySelector("body")
+   body.appendChild(nuevo)
 
-let persona = {
-    Jessica : {
-        nombre : "Jessica",
-        edad : 27,
-        vive : true
-    },
-    candela : {
-        nombre : "Candela",
-        edad : 30,
-        vive : false
-    }
+   contador = contador + 1
+
+    /*
+    Reemplazar el codigo de la funcion hacerClick por:
+    
+    1) Crear un boton por cada click que se haga
+    2) Cada boton nuevo se tiene que ver en el DOM
+    3) Cada boton nuevo tiene que tener un callback en su propio evento click tambien
+    4) Todos los botones en pantalla tienen que tener como texto "Boton N", 
+    donde N es un numero arrancando de 1 el cual se va aumentando de a una unidad.
+    */
 }
 
-persona.trabaja = false
-persona.tienePerrito = 3
-
-//console.table(persona)
-
-//console.log(numeros[5])
-//Console.log(numeros["length"])
-//Console.log(numeros.length)
-//console.log(X) : Nos muestra en consola lo que valga X
-
-//Estructuras de control: condicionales - bucles/ciclos
-
-//for: Sirve para iterar sobre matrices indexadas secuenciales o sea un array
-
-for(let i=0; i<numeros.length; i++){
-    console.log(numeros[i])
+function unaMismaFuncionParaTodosLosBotones(){
+    console.log("Click de alguno de los botones!")
 }
-
-//for...in : sirve para iterar matrices indexadas asociativas, o sea un objeto
-
-for(let prop in persona){
-    console.log(prop)
-}
-
-// V8 = JS Engine
-// WEB APIs = https://developer.mozilla.org/es/docs/Web/API
-//Objeto global = window = BOM = Browser Object Model =
-
-//var a = 1
-//window.a = 1
-
-//innerHeight => Number - el alto en PX del documento
-//innerWidth => Number - El ancho en PX del documento
-//outerHeight => Number - el alto en PX del navegador
-//outerWidth => Number - el ancho en PX del navegador
-//consolo => Object - Nos da funciones de logueo en consola de desarrollo
-//location => Object - Tiene propiedades que controlan la ubicacion de un usuario
-//location.href = String - Mapea a la barra de direcciones
-//history.back() => Retrocede un nivel en el historial
-//history. forward() => Avanza un nivel en el historial
-
-//document = DOM = Document Object Model
-//console.dir(X) => Muestra X en formado JSON
-//JSON = Javascript Object Notation
- console.clear()
-
-
- //SELECCIONAR NODOS
- /*document.getElementById(X) => DomElement
- document.getElementsByClassName(X) => Array
- document.getElementByTagName(X) => Array
- document.querySelector(X) => DomElement - Busca la primera instancia del selector X
- document.querySelectorAll(X) => Array - Busca todas las instancias del selector X
- */
-
-
-/*let uno = document.getElementById ("item1")
-let items = document.getElementsByClassName("item")
-let lis = document.getElementsByTagName("li")
-*/
-
-/*let uno = document.querySelector("#item1")
-let items = document.querySelectorAll(".item")
-let lis = document.querySelectorAll("li")
-*/
-
-//CREAR NODOS
-let p = document.createElement("p")
-p.innerText = "Mi Nuevo Texto"
-p.id = "nuevo"
-p.className = "item"
-
-//AGREGAR NODOS AL DOM
-//Nodo.appendChild(NodoNuevo) => Inserta el NodoNuevo como ultimo hijo de Nodo
-//Nodo.insertBefore(NodoNuevo, NodoRef) => Inserta el NodoNuevo antes del NodoRef
-
-let body = document.querySelector("body")
-body.appendChild(p)
-
 
 /*
-1) Crear un elemento <li> y ponerle un texto
-2) Meterlo como primer item del <ul>
+En un HTML nuevo:
 
-EXTRA
-1) Crear un elemento <ul> nuevo y vacio
-2) Hacer un bucle de 5 iteraciones
-3) Por iteracion de ciclo se tiene que crear un <li> nuevo
-4) Agregar todos los <li> al <ul> del punto 1
-5) Agregar el <ul> del punto 1 al DOM
+1) Hacer una etiqueta button con un texto que diga "Crear parrafo!"
+2) En JS agarrar ese nodo 
+3) Registrarle un callback a su click
+4) El callback del boton tiene que poder crear la siguiente estructura:
 
+<div>
+    <p>lorem ipsum</p>
+    <button>borrar</button>
+</div>
+
+5) El boton tiene el texto "borrar" tambien tiene que tener un click y su 
+callback tiene que poder borrar el mismo parrafo al cual pertenece usando 
+la funcion:
+
+NodoT.removeChild(NodoC) => le remueve el nodoC(child) al NodoT(target)
 */
 
-let a = document.getElementById("item1") 
-let li = document.createElement("li")
-li.innerText = "item 1"
-
-let ul = document.querySelector("ul")
-ul.insertBefore(li,a)
-
-let nuevo_ul = document.createElement("ul")
-
-for (let i=0; i<5; i++){
-    let li_nuevo = document.createElement("li")
-    li_nuevo.innerText = "Nuevo Texto " + i
-    nuevo_ul.appendChild(li_nuevo)
-}
-
-body.appendChild(nuevo_ul)
